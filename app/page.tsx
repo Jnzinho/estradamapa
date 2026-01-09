@@ -26,7 +26,7 @@ const roadmaps: RoadmapItem[] = [
     image: epicoraImage,
     href: '/roadmap/epicora',
     isNew: true,
-    items: ['typescript', 'react', 'node', 'nest'],
+    items: ['TS', 'React', 'Node', 'Nest'],
   },
 ];
 
@@ -46,8 +46,8 @@ export default function Home() {
           estradamapa.sh
         </h1>
         <p className="mt-6 text-lg font-light leading-relaxed text-white/60 sm:text-xl">
-          Roadmaps para você se especializar em stacks reais. Escolha um caminho
-          e acompanhe seu progresso.
+          Roadmaps para você se especializar em stacks de tecnologia. Escolha um
+          caminho e acompanhe seu progresso.
         </p>
       </div>
 

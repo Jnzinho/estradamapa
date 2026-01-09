@@ -50,13 +50,13 @@ export function RoadmapDetailView({ step }: RoadmapDetailViewProps) {
   return (
     <div className="mx-auto max-w-4xl">
       <Link href="/roadmap/epicora">
-        <Button variant="secondary" className="mb-8 px-2">
-          <HugeiconsIcon icon={ArrowLeft01Icon} className="size-4 mr-2" />
+        <Button variant="ghost" className="mb-4 px-2">
+          <HugeiconsIcon icon={ArrowLeft01Icon} className="size-4 mr-0" />
           Voltar ao Roadmap
         </Button>
       </Link>
 
-      <div className="bg-card border rounded-2xl p-8 shadow-sm">
+      <div className="bg-black/20 backdrop-blur-2xl! border border-gray-800 rounded-2xl p-8 shadow-sm">
         <div className="flex flex-col md:flex-row gap-6 items-start md:items-center mb-8">
           <div
             className={cn(
@@ -91,7 +91,7 @@ export function RoadmapDetailView({ step }: RoadmapDetailViewProps) {
           </div>
         </div>
 
-        <Separator className="my-8" />
+        <Separator className="my-8 bg-gray-800" />
 
         <div className="space-y-8">
           <section>
@@ -113,10 +113,10 @@ export function RoadmapDetailView({ step }: RoadmapDetailViewProps) {
                     <div
                       key={i}
                       className={cn(
-                        'flex items-center p-4 rounded-lg border transition-all duration-200',
+                        'flex items-center p-4 rounded-lg border border-gray-800 transition-all duration-200',
                         isCompleted
-                          ? 'bg-primary/5 border-primary/20'
-                          : 'hover:bg-muted/50'
+                          ? 'bg-primary/2 border-primary/20'
+                          : 'hover:bg-white/5'
                       )}
                     >
                       <button
