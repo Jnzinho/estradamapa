@@ -1,65 +1,128 @@
-import Image from "next/image";
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { ArrowRight01Icon, Route03Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+import Image, { StaticImageData } from 'next/image';
+import Link from 'next/link';
+import epicoraImage from '@/assets/epicora.png';
+import { PageLayout, SectionDivider } from '@/components/layouts/page-layout';
+
+interface RoadmapItem {
+  id: string;
+  title: string;
+  description: string;
+  image: StaticImageData;
+  href: string;
+  isNew?: boolean;
+  items: string[];
+}
+
+const roadmaps: RoadmapItem[] = [
+  {
+    id: 'epicora',
+    title: 'Epicora',
+    description:
+      'Guia completo utilizado para treinar desenvolvedores da epicora software house, necessita apenas de uma inscrição da udemy.',
+    image: epicoraImage,
+    href: '/roadmap/epicora',
+    isNew: true,
+    items: ['typescript', 'react', 'node', 'nest'],
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <PageLayout>
+      <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto mb-0 inline-flex items-center justify-center">
+          <HugeiconsIcon
+            icon={Route03Icon}
+            className="size-32 text-violet-300"
+            strokeWidth={0.8}
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <h1 className="text-5xl font-light tracking-tight text-violet-200 sm:text-7xl">
+          estradamapa.sh
+        </h1>
+        <p className="mt-6 text-lg font-light leading-relaxed text-white/60 sm:text-xl">
+          Roadmaps para você se especializar em stacks reais. Escolha um caminho
+          e acompanhe seu progresso.
+        </p>
+      </div>
+
+      <SectionDivider label="Roadmaps por empresa" />
+
+      <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {roadmaps.map((roadmap) => (
+          <Link
+            key={roadmap.id}
+            href={roadmap.href}
+            className="group relative flex items-center justify-between rounded-xl border border-white/10 bg-white/2 px-4 py-4 shadow-sm backdrop-blur transition-colors hover:border-white/20 hover:bg-white/4"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <span className="absolute inset-0 rounded-xl ring-1 ring-transparent group-hover:ring-violet-500/20" />
+
+            <div className="relative flex min-w-0 items-center gap-4">
+              <div className="relative size-12 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-white/5">
+                <Image
+                  src={roadmap.image}
+                  alt={roadmap.title}
+                  fill
+                  className="object-cover opacity-90"
+                  sizes="48px"
+                />
+              </div>
+
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <div className="truncate text-base font-medium text-white/85">
+                    {roadmap.title}
+                  </div>
+                  {roadmap.isNew && (
+                    <div className="flex items-center gap-1.5">
+                      <span className="size-2 rounded-full bg-violet-400" />
+                      <span className="text-xs text-white/60">Novo</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {roadmap.items.slice(0, 4).map((item) => (
+                    <Badge
+                      key={item}
+                      variant="secondary"
+                      className="border border-white/10 bg-white/5 text-white/70 hover:bg-white/5"
+                    >
+                      {item}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="relative ml-3 flex shrink-0 items-center gap-3 text-white/40">
+              <HugeiconsIcon
+                icon={ArrowRight01Icon}
+                className="size-5 transition-transform group-hover:translate-x-0.5"
+              />
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      <div className="mt-14 flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:justify-between">
+        <p className="text-sm text-white/45">
+          estradamapa.sh — feito para treinar pessoas com stacks do mundo real.
+        </p>
+        <Link href="https://github.com/jnzinho/estradamapa" target="_blank">
+          <Button
+            variant="outline"
+            className="h-10 rounded-full border-white/15 bg-transparent text-white/80 hover:bg-white/5 hover:text-white"
           >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            Contribuir no GitHub
+          </Button>
+        </Link>
+      </div>
+    </PageLayout>
   );
 }
