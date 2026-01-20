@@ -3,18 +3,23 @@ import { algorithmsRoadmapData } from "@/lib/algorithms-roadmap-data";
 import { SectionDivider } from "@/components/layouts/page-layout";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { AnalyticsUpIcon } from "@hugeicons/core-free-icons";
+import algorithmsImage from "@/assets/algorithms.webp";
+import Image from "next/image";
 
 export default function AlgorithmsRoadmapPage() {
   return (
     <div>
       <div className="text-center mb-10 flex flex-col items-center justify-center">
-        <div className="rounded-xl mb-3 ring-1 ring-white/10 p-4 bg-linear-to-br from-violet-500/20 to-purple-600/20">
-          <HugeiconsIcon
-            icon={AnalyticsUpIcon}
-            className="size-12 text-violet-300"
-            strokeWidth={1.2}
-          />
-        </div>
+        <Image
+          src={algorithmsImage}
+          alt="Algoritmos"
+          width={80}
+          height={80}
+          className="rounded-xl mb-6 ring-1 ring-white/10"
+        />
+        <p className="text-white/40 text-xs font-light max-w-3xl text-center">
+          Não é muito um roadmap (é um curso), mas é um conteúdo fantástico
+        </p>
         <h1 className="text-4xl font-light tracking-wide text-violet-200 sm:text-6xl mb-2">
           Algorithms (Inglês)
         </h1>
