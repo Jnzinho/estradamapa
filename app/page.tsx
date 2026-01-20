@@ -26,7 +26,7 @@ interface RoadmapItem {
 const roadmaps: RoadmapItem[] = [
   {
     id: "epicora",
-    title: "Epicora",
+    title: "Epicora  🇧🇷",
     description:
       "Guia completo utilizado para treinar desenvolvedores da epicora software house, necessita apenas de uma inscrição da udemy.",
     image: epicoraImage,
@@ -36,12 +36,12 @@ const roadmaps: RoadmapItem[] = [
   },
   {
     id: "algorithms",
-    title: "Algorithms (Inglês)",
+    title: "Algorithms  🇺🇸",
     description:
       "The Last Algorithms Course You'll Need - por ThePrimeagen. Big O, estruturas de dados, busca e ordenação.",
     image: algorithmsImage,
     href: "/roadmap/algorithms",
-    isNew: true,
+    isNew: false,
     items: ["Big O", "Trees", "Graphs", "Sort"],
   },
 ];
