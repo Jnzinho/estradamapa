@@ -1,11 +1,11 @@
-import { RoadmapList } from '@/components/roadmap/roadmap-list';
-import { SectionDivider } from '@/components/layouts/page-layout';
-import { Button } from '@/components/ui/button';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowLeft01Icon } from '@hugeicons/core-free-icons';
-import { RoadmapStep } from '@/lib/types';
-import Image, { StaticImageData } from 'next/image';
-import Link from 'next/link';
+import { RoadmapList } from "@/components/roadmap/roadmap-list";
+import { SectionDivider } from "@/components/layouts/page-layout";
+import { Button } from "@/components/ui/button";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { ArrowLeft01Icon } from "@hugeicons/core-free-icons";
+import { RoadmapStep } from "@/lib/types";
+import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 
 interface RoadmapPageLayoutProps {
   title: string;
@@ -53,10 +53,10 @@ export function RoadmapPageLayout({
             {subtitle}
           </p>
         )}
-        <h1 className="text-4xl font-light tracking-wide text-violet-200 sm:text-6xl mb-2">
+        <h1 className="text-4xl font-normal tracking-tight text-violet-200 sm:text-6xl mb-4">
           {title}
         </h1>
-        <p className="text-white/60 text-lg font-light max-w-3xl text-center">
+        <p className="text-white/60 text-base font-light max-w-xl text-center">
           {description}
         </p>
         {externalLink && (

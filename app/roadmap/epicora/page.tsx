@@ -1,6 +1,6 @@
-import { RoadmapPageLayout } from '@/components/roadmap/roadmap-page-layout';
-import { roadmapData } from './data';
-import logo from '@/assets/epicora.png';
+import { RoadmapPageLayout } from "@/components/roadmap/roadmap-page-layout";
+import { roadmapData } from "./data";
+import logo from "@/assets/epicora.png";
 
 export default function EpicoraRoadmapPage() {
   return (

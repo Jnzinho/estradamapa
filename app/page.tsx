@@ -15,6 +15,7 @@ import { PageLayout, SectionDivider } from "@/components/layouts/page-layout";
 interface RoadmapItem {
   id: string;
   title: string;
+  by?: string;
   description: string;
   image?: StaticImageData;
   icon?: any;
@@ -27,6 +28,7 @@ const roadmaps: RoadmapItem[] = [
   {
     id: "epicora",
     title: "Epicora  🇧🇷",
+    by: "por João Castro",
     description:
       "Guia completo utilizado para treinar desenvolvedores da epicora software house, necessita apenas de uma inscrição da udemy.",
     image: epicoraImage,
@@ -37,6 +39,7 @@ const roadmaps: RoadmapItem[] = [
   {
     id: "algorithms",
     title: "Algorithms  🇺🇸",
+    by: "Course by ThePrimeagen",
     description:
       "The Last Algorithms Course You'll Need - por ThePrimeagen. Big O, estruturas de dados, busca e ordenação.",
     image: algorithmsImage,
@@ -54,11 +57,11 @@ export default function Home() {
           <HugeiconsIcon
             icon={Route03Icon}
             className="size-32 text-violet-300"
-            strokeWidth={0.8}
+            strokeWidth={1.2}
           />
         </div>
 
-        <h1 className="text-5xl font-light tracking-tight text-violet-200 sm:text-7xl">
+        <h1 className="text-5xl font-normal tracking-tight text-violet-200 sm:text-7xl">
           estradamapa.sh
         </h1>
         <p className="mt-6 text-lg font-light leading-relaxed text-white/60 sm:text-xl">
@@ -110,6 +113,12 @@ export default function Home() {
                   )}
                 </div>
 
+                {roadmap.by && (
+                  <div className="mt-0.5 text-xs text-white/50">
+                    {roadmap.by}
+                  </div>
+                )}
+
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {roadmap.items.slice(0, 4).map((item) => (
                     <Badge
@@ -136,7 +145,8 @@ export default function Home() {
 
       <div className="mt-14 flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:justify-between">
         <p className="text-sm text-white/45">
-          estradamapa.sh — feito para treinar pessoas com stacks do mundo real.
+          estradamapa.sh — agregador de conteúdo gratuito para desenvolver
+          pessoas programadoras.
         </p>
         <Link href="https://github.com/jnzinho/estradamapa" target="_blank">
           <Button
