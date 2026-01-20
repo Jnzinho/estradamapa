@@ -1,8 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { roadmapData, RoadmapStep, RoadmapStepStatus } from "@/lib/roadmap-data";
-import { algorithmsRoadmapData } from "@/lib/algorithms-roadmap-data";
+import { RoadmapStep, RoadmapStepStatus } from "@/lib/types";
 
 interface RoadmapState {
   completedResources: Record<string, number[]>; // stepId -> array of completed resource indices
@@ -10,6 +9,7 @@ interface RoadmapState {
 
 interface RoadmapContextType {
   roadmapId: string;
+  roadmapData: RoadmapStep[];
   isResourceCompleted: (stepId: string, resourceIndex: number) => boolean;
   toggleResource: (stepId: string, resourceIndex: number) => void;
   getStepStatus: (stepId: string) => RoadmapStepStatus;
@@ -18,18 +18,13 @@ interface RoadmapContextType {
 
 const RoadmapContext = createContext<RoadmapContextType | undefined>(undefined);
 
-// Map of roadmap IDs to their data
-const roadmapDataMap: Record<string, RoadmapStep[]> = {
-  epicora: roadmapData,
-  algorithms: algorithmsRoadmapData,
-};
-
 interface RoadmapProviderProps {
   children: React.ReactNode;
-  roadmapId?: string;
+  roadmapId: string;
+  roadmapData: RoadmapStep[];
 }
 
-export function RoadmapProvider({ children, roadmapId = "epicora" }: RoadmapProviderProps) {
+export function RoadmapProvider({ children, roadmapId, roadmapData }: RoadmapProviderProps) {
   const storageKey = `roadmap-progress-${roadmapId}`;
   
   const [state, setState] = useState<RoadmapState>({
@@ -85,8 +80,7 @@ export function RoadmapProvider({ children, roadmapId = "epicora" }: RoadmapProv
   };
 
   const getStepStatus = (stepId: string): RoadmapStepStatus => {
-    const currentRoadmapData = roadmapDataMap[roadmapId] || roadmapData;
-    const step = currentRoadmapData.find((s) => s.id === stepId);
+    const step = roadmapData.find((s) => s.id === stepId);
     if (!step) return "pending";
 
     // Check if user has interacted with this step
@@ -119,6 +113,7 @@ export function RoadmapProvider({ children, roadmapId = "epicora" }: RoadmapProv
     <RoadmapContext.Provider
       value={{
         roadmapId,
+        roadmapData,
         isResourceCompleted,
         toggleResource,
         getStepStatus,

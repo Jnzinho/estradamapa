@@ -14,9 +14,9 @@ import {
   StructureFolderIcon,
   TreeIcon,
 } from '@hugeicons/core-free-icons';
-import { RoadmapStep } from './roadmap-data';
+import { RoadmapStep } from '@/lib/types';
 
-export const algorithmsRoadmapData: RoadmapStep[] = [
+export const roadmapData: RoadmapStep[] = [
   {
     id: 'introduction',
     title: 'Introduction',

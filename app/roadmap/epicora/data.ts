@@ -5,27 +5,15 @@ import {
   Globe02Icon as GlobalIcon,
   Layers01Icon,
   Rocket01Icon,
-  SecurityCheckIcon,
 } from '@hugeicons/core-free-icons';
-
-export type RoadmapStepStatus = 'completed' | 'in-progress' | 'pending';
-
-export interface RoadmapStep {
-  id: string;
-  title: string;
-  description: string;
-  status: RoadmapStepStatus;
-  icon: any;
-  details: string;
-  resources?: { title: string; url: string }[];
-}
+import { RoadmapStep } from '@/lib/types';
 
 export const roadmapData: RoadmapStep[] = [
   {
     id: 'frontend-basics',
     title: 'Fundamentos de Frontend',
     description: 'HTML, CSS e fundamentos de JavaScript.',
-    status: 'pending', // Default initial status
+    status: 'pending',
     icon: CodeIcon,
     details:
       'Dominar as tecnologias principais da web é o primeiro passo. Você precisa entender HTML semântico, CSS moderno (Flexbox, Grid) e o básico de JavaScript (ES6+).',

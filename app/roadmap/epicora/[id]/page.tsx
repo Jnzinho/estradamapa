@@ -1,4 +1,4 @@
-import { roadmapData } from '@/lib/roadmap-data';
+import { roadmapData } from '../data';
 import { RoadmapDetailView } from '@/components/roadmap/roadmap-detail-view';
 import { notFound } from 'next/navigation';
 
@@ -14,7 +14,7 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function RoadmapDetailPage({
+export default async function EpicoraDetailPage({
   params,
 }: RoadmapDetailPageProps) {
   const { id } = await params;
@@ -24,5 +24,5 @@ export default async function RoadmapDetailPage({
     notFound();
   }
 
-  return <RoadmapDetailView step={step} />;
+  return <RoadmapDetailView step={step} backPath="/roadmap/epicora" />;
 }

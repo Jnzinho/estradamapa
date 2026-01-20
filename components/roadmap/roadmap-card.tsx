@@ -1,6 +1,6 @@
 'use client';
 
-import { RoadmapStep } from '@/lib/roadmap-data';
+import { RoadmapStep } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,

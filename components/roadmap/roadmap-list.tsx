@@ -1,4 +1,4 @@
-import { RoadmapStep } from "@/lib/roadmap-data";
+import { RoadmapStep } from "@/lib/types";
 import { RoadmapCard } from "./roadmap-card";
 
 interface RoadmapListProps {
