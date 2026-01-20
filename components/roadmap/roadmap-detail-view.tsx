@@ -19,9 +19,10 @@ import { useRoadmap } from '@/components/roadmap/roadmap-context';
 
 interface RoadmapDetailViewProps {
   step: RoadmapStep;
+  backPath?: string;
 }
 
-export function RoadmapDetailView({ step }: RoadmapDetailViewProps) {
+export function RoadmapDetailView({ step, backPath = "/roadmap/epicora" }: RoadmapDetailViewProps) {
   const { getStepStatus, isResourceCompleted, toggleResource } = useRoadmap();
 
   const currentStatus = getStepStatus(step.id);
@@ -49,7 +50,7 @@ export function RoadmapDetailView({ step }: RoadmapDetailViewProps) {
 
   return (
     <div className="mx-auto max-w-4xl">
-      <Link href="/roadmap/epicora">
+      <Link href={backPath}>
         <Button variant="ghost" className="mb-4 px-2">
           <HugeiconsIcon icon={ArrowLeft01Icon} className="size-4 mr-0" />
           Voltar ao Roadmap

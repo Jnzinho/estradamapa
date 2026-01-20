@@ -1,17 +1,23 @@
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { ArrowRight01Icon, Route03Icon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
-import Image, { StaticImageData } from 'next/image';
-import Link from 'next/link';
-import epicoraImage from '@/assets/epicora.png';
-import { PageLayout, SectionDivider } from '@/components/layouts/page-layout';
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  ArrowRight01Icon,
+  Route03Icon,
+  AnalyticsUpIcon,
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
+import epicoraImage from "@/assets/epicora.png";
+import algorithmsImage from "@/assets/algorithms.webp";
+import { PageLayout, SectionDivider } from "@/components/layouts/page-layout";
 
 interface RoadmapItem {
   id: string;
   title: string;
   description: string;
-  image: StaticImageData;
+  image?: StaticImageData;
+  icon?: any;
   href: string;
   isNew?: boolean;
   items: string[];
@@ -19,14 +25,24 @@ interface RoadmapItem {
 
 const roadmaps: RoadmapItem[] = [
   {
-    id: 'epicora',
-    title: 'Epicora',
+    id: "epicora",
+    title: "Epicora",
     description:
-      'Guia completo utilizado para treinar desenvolvedores da epicora software house, necessita apenas de uma inscrição da udemy.',
+      "Guia completo utilizado para treinar desenvolvedores da epicora software house, necessita apenas de uma inscrição da udemy.",
     image: epicoraImage,
-    href: '/roadmap/epicora',
+    href: "/roadmap/epicora",
+    isNew: false,
+    items: ["TS", "React", "Node", "Nest"],
+  },
+  {
+    id: "algorithms",
+    title: "Algorithms (Inglês)",
+    description:
+      "The Last Algorithms Course You'll Need - por ThePrimeagen. Big O, estruturas de dados, busca e ordenação.",
+    image: algorithmsImage,
+    href: "/roadmap/algorithms",
     isNew: true,
-    items: ['TS', 'React', 'Node', 'Nest'],
+    items: ["Big O", "Trees", "Graphs", "Sort"],
   },
 ];
 
@@ -51,7 +67,7 @@ export default function Home() {
         </p>
       </div>
 
-      <SectionDivider label="Roadmaps por empresa" />
+      <SectionDivider label="Roadmaps disponíveis" />
 
       <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {roadmaps.map((roadmap) => (
@@ -63,14 +79,22 @@ export default function Home() {
             <span className="absolute inset-0 rounded-xl ring-1 ring-transparent group-hover:ring-violet-500/20" />
 
             <div className="relative flex min-w-0 items-center gap-4">
-              <div className="relative size-12 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-white/5">
-                <Image
-                  src={roadmap.image}
-                  alt={roadmap.title}
-                  fill
-                  className="object-cover opacity-90"
-                  sizes="48px"
-                />
+              <div className="relative size-12 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-white/5 flex items-center justify-center">
+                {roadmap.image ? (
+                  <Image
+                    src={roadmap.image}
+                    alt={roadmap.title}
+                    fill
+                    className="object-cover opacity-90"
+                    sizes="48px"
+                  />
+                ) : roadmap.icon ? (
+                  <HugeiconsIcon
+                    icon={roadmap.icon}
+                    className="size-6 text-violet-300"
+                    strokeWidth={1.5}
+                  />
+                ) : null}
               </div>
 
               <div className="min-w-0">

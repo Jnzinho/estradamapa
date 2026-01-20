@@ -1,13 +1,15 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { roadmapData, RoadmapStepStatus } from "@/lib/roadmap-data";
+import { roadmapData, RoadmapStep, RoadmapStepStatus } from "@/lib/roadmap-data";
+import { algorithmsRoadmapData } from "@/lib/algorithms-roadmap-data";
 
 interface RoadmapState {
   completedResources: Record<string, number[]>; // stepId -> array of completed resource indices
 }
 
 interface RoadmapContextType {
+  roadmapId: string;
   isResourceCompleted: (stepId: string, resourceIndex: number) => boolean;
   toggleResource: (stepId: string, resourceIndex: number) => void;
   getStepStatus: (stepId: string) => RoadmapStepStatus;
@@ -16,7 +18,20 @@ interface RoadmapContextType {
 
 const RoadmapContext = createContext<RoadmapContextType | undefined>(undefined);
 
-export function RoadmapProvider({ children }: { children: React.ReactNode }) {
+// Map of roadmap IDs to their data
+const roadmapDataMap: Record<string, RoadmapStep[]> = {
+  epicora: roadmapData,
+  algorithms: algorithmsRoadmapData,
+};
+
+interface RoadmapProviderProps {
+  children: React.ReactNode;
+  roadmapId?: string;
+}
+
+export function RoadmapProvider({ children, roadmapId = "epicora" }: RoadmapProviderProps) {
+  const storageKey = `roadmap-progress-${roadmapId}`;
+  
   const [state, setState] = useState<RoadmapState>({
     completedResources: {},
   });
@@ -25,7 +40,7 @@ export function RoadmapProvider({ children }: { children: React.ReactNode }) {
 
   // Load from local storage on mount
   useEffect(() => {
-    const saved = localStorage.getItem("roadmap-progress");
+    const saved = localStorage.getItem(storageKey);
     if (saved) {
       try {
         setState(JSON.parse(saved));
@@ -34,14 +49,14 @@ export function RoadmapProvider({ children }: { children: React.ReactNode }) {
       }
     }
     setIsLoaded(true);
-  }, []);
+  }, [storageKey]);
 
   // Save to local storage on change
   useEffect(() => {
     if (isLoaded) {
-      localStorage.setItem("roadmap-progress", JSON.stringify(state));
+      localStorage.setItem(storageKey, JSON.stringify(state));
     }
-  }, [state, isLoaded]);
+  }, [state, isLoaded, storageKey]);
 
   const isResourceCompleted = (stepId: string, resourceIndex: number) => {
     return state.completedResources[stepId]?.includes(resourceIndex) ?? false;
@@ -70,7 +85,8 @@ export function RoadmapProvider({ children }: { children: React.ReactNode }) {
   };
 
   const getStepStatus = (stepId: string): RoadmapStepStatus => {
-    const step = roadmapData.find((s) => s.id === stepId);
+    const currentRoadmapData = roadmapDataMap[roadmapId] || roadmapData;
+    const step = currentRoadmapData.find((s) => s.id === stepId);
     if (!step) return "pending";
 
     // Check if user has interacted with this step
@@ -102,6 +118,7 @@ export function RoadmapProvider({ children }: { children: React.ReactNode }) {
   return (
     <RoadmapContext.Provider
       value={{
+        roadmapId,
         isResourceCompleted,
         toggleResource,
         getStepStatus,

@@ -25,9 +25,10 @@ import { useRoadmap } from '@/components/roadmap/roadmap-context';
 interface RoadmapCardProps {
   step: RoadmapStep;
   index: number;
+  basePath?: string;
 }
 
-export function RoadmapCard({ step, index }: RoadmapCardProps) {
+export function RoadmapCard({ step, index, basePath = "/roadmap/epicora" }: RoadmapCardProps) {
   const { getStepStatus } = useRoadmap();
   const currentStatus = getStepStatus(step.id);
 
@@ -53,7 +54,7 @@ export function RoadmapCard({ step, index }: RoadmapCardProps) {
   };
 
   return (
-    <Link href={`/roadmap/epicora/${step.id}`} className="block group h-full">
+    <Link href={`${basePath}/${step.id}`} className="block group h-full">
       <Card className="bg-black/10 backdrop-blur-sm h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg relative overflow-hidden">
         {/* Step Number Background */}
         <div className="absolute -right-4 -top-4 text-9xl font-bold text-muted/20 rotate-12 select-none group-hover:text-primary/10 transition-colors">
