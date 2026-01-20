@@ -11,7 +11,7 @@ export default function AlgorithmsRoadmapPage() {
       imageAlt="Algoritmos"
       steps={roadmapData}
       basePath="/roadmap/algorithms"
-      subtitle="Not really a roadmap, its just theprimeagen course, but is fantastic"
+      subtitle="Not really a roadmap, its just theprimeagen's course, but is fantastic"
       externalLink={{
         url: "https://frontendmasters.com/courses/algorithms/",
         label: "Ver curso no Frontend Masters",
